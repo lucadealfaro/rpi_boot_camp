@@ -1,11 +1,13 @@
 # Webcam Boot Camp
 Luca de Alfaro, 2016
  
-In this boot camp, we will transform our RPI into a web-viewable webcam. 
+In this boot camp, we will transform our RPI into a web-viewable webcam. Obviously, you need to have installed the [camera module](https://www.raspberrypi.org/products/camera-module/) on your RPI for this to work; see [these instructions](https://www.raspberrypi.org/help/camera-module-setup/). To start, go to the webcam directory:
+
+    cd webcam
 
 ### If you have an 8MB, v2 camera
 
-The camera firmware was shipped with a bug that mirrors the images, left-to-right. Images are easy to fix (e.g., using PIL, the Python imaging library), but movies are harder. If you wish to correct the image mirroring, proceed as follows:
+The camera firmware was shipped with a bug that mirrors the images, left-to-right. Images are easy to fix (e.g., using PIL, the Python imaging library), but movies are harder. If you wish to correct the image mirroring, proceed as follows (see [here](https://www.raspberrypi.org/forums/viewtopic.php?f=43&t=145980) for an explanation):
 
     sudo apt-get update
     sudo apt-get upgrade
@@ -25,18 +27,54 @@ The webcam consists of two pieces of code.  The first piece will continuously re
 
 Flash memory can be written only a finite, and not very large, amount of times before it fails. A solution to this problem is to use a filesystem in RAM.  To this end do:
 
-    cd webcam
-    cp scripts/ramfs /etc/init.d
+    sudo cp scripts/ramfs /etc/init.d
+    sudo chown root /etc/init.d/ramfs
+    sudo chmod u+x /etc/init.d/ramfs
     sudo update-rc.d ramfs defaults
     
-This will create a 50MB RAM filesystem and mount it at /ramfs whenever the rpi boots. You can mount it manually without rebooting via:
+This will create a 200MB RAM filesystem and mount it at /ramfs whenever the rpi boots. Before proceeding, mount it manually without rebooting via:
 
     /etc/init.d/ramfs start
     
 ### Image acquisition loop    
 
-To start the image acquisition loop, 
+To start the image acquisition loop, we first need to install the picamera Python package, which enables camera access from python. 
 
+    sudo apt-get install python-picamera
+    
+Then, you can run the image acquisition code by hand:
+
+    python image_acquisition/image_loop.py
+    
+Good.  Now, to keep it up and running, you can either do:
+
+    python image_acquisition/image_loop.py &
+    
+and then kill it if needed with
+
+    killall /usr/bin/python
+    
+or else, you can also start that via an init script:
+
+    sudo cp scripts/camcam /etc/init.d
+    sudo chown root /etc/init.d/camcam
+    sudo chmod u+x /etc/init.d/camcam
+    sudo update-rc.d camcam defaults
+    sudo /etc/init.d/camcam start
+    
+### Visualization
+
+We assume that you got the image acquisition loop above working. 
+Now we need to get and start the web2py web server. 
+
+    cd ~/rpi_boot_camp
+    wget http://www.web2py.com/examples/static/web2py_src.zip
+    unzip web2py_src.zip
+
+
+ 
+
+ 
 ### Starting the web server
 
 You can start the web server man
