@@ -42,6 +42,13 @@ Follow [these instructions](https://github.com/rakshit-agrawal/python-twitter-ap
     cp credentials.example.json credentials.json
     nano credentials.json
 
-and complete the information there. 
+and complete the information there.  Once that is done, you can run your twitter-enabled button, and each time you press the button, a twit will be posted:
+
+    python press_to_twit.py
+    
+## Next steps
+
+You can create an /etc/init.d script for having your press_to_twit.py process start automatically, following the examples in the webcam boot camp provided here.
+
 
     
