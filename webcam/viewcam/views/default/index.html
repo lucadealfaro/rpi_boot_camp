@@ -10,7 +10,7 @@
     jQuery.getJSON(picamera_url)
     .done(function(data){
         jQuery('#pi').attr('src', data.src);
-        setTimeout(pi, 500);
+        setTimeout(pi, 10);
       });
   };
   pi();
