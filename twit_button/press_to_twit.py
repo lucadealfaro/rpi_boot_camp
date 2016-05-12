@@ -29,20 +29,17 @@ def twit():
     t = Twitter(**twitter_access)
     t.post_tweet("I have been pressed into service at %s" % datetime.datetime.now().isoformat())
 
-# This is the callback for when a button press has been detected.
-def button_press(channel):
-    print "Button press on %r" % channel
-    # We flash the LED ON for half a second.
-    GPIO.output(PIN_OUT, True)
-    # Here is the novelty: we do the twitter call!
-    twit()
-    GPIO.output(PIN_OUT, False)
-
-# We attach the callback to the button with a debounce time of 200ms.
-GPIO.add_event_detect(PIN_IN, GPIO.FALLING, callback=button_press, bouncetime=200)
-
-# That's all, folks.
-# We need to sleep forever.
+# We debounce ourselves, since the standard debouncing leaves much to be desired.
+num_consecutive = 0
 while True:
-    time.sleep(1.0)
+    if GPIO.input(PIN_IN):
+        num_consecutive = 0
+    else:
+        num_consecutive += 1
+        if num_consecutive > 2:
+            num_consecutive = 0
+            GPIO.output(PIN_OUT, True)
+            twit()
+            GPIO.output(PIN_OUT, False)
+    time.sleep(0.5)
 
