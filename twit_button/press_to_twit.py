@@ -27,7 +27,7 @@ twitter_username = twitter_info['username']
 # This is the twitting function.
 def twit():
     t = Twitter(**twitter_access)
-    t.post_twit("I have been pressed into service at %s" % datetime.datetime.now().isoformat())
+    t.post_tweet("I have been pressed into service at %s" % datetime.datetime.now().isoformat())
 
 # This is the callback for when a button press has been detected.
 def button_press(channel):
