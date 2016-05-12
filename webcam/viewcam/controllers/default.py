@@ -17,9 +17,8 @@ PATH = '/ramfs/img.jpg'
 def get_image():
     filename = PATH
     with open(filename) as imagefile:
-        try:
-            image = imagefile.read()
-            data = {'src':'data:image/jpeg;base64,'+base64.b64encode(image)}
+        image = imagefile.read()
+        data = {'src':'data:image/jpeg;base64,'+base64.b64encode(image)}
         return json.dumps(data)
 
 

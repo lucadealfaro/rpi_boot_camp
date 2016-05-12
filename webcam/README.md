@@ -70,13 +70,35 @@ We assume that you got the image acquisition loop above working. To visualize th
     wget http://www.web2py.com/examples/static/web2py_src.zip
     unzip web2py_src.zip
 
-A web2py application can consist of multiple apps; see the [web2py book](http://book.web2py.com) for more information.  We now need to link the viewcam app to the web2py server.
+A web2py application can consist of multiple apps; see the [web2py book](http://www.web2py.com/book) for more information.  We now need to link the viewcam app to the web2py server.
 
-    ln -s 
+    ln -s ../../webcam/viewcam web2py/applications/
+    
+If you think the ../.. above doesn't make sense, so do I. But someone else sometime ago must have thought otherwise. Oh well. You can now start web2py manually: 
 
- 
+    python web2py/web2py.py -e -a banana -i 0.0.0.0 -p 8888
+        
+If the IP address of your RPI is (for example) 192.168.1.163, point your browser to the URL [http://192.168.1.163:8888/viewcam/](http://192.168.1.163:8888/viewcam/).  You should see the image periodically (and fast) updating.  Congratulations! 
 
- 
-### Starting the web server
+If you now want your webcam to start automatically at boot, you can do:
 
-You can start the web server man
+    cd webcam
+    sudo cp scripts/web2py /etc/init.d
+    sudo chown root /etc/init.d/web2py
+    sudo chmod u+x /etc/init.d/web2py
+    sudo update-rc.d web2py defaults
+    sudo /etc/init.d/web2py start
+
+**Note:** *This is not secure.* You have started on the RPI a web server with password "banana".  At the very least, change this password (*both* in the script above, and in scripts/web2py) to some password of your choice, and reinstall the auto-run script via:
+
+    sudo cp scripts/web2py /etc/init.d
+    sudo update-rc.d web2py defaults
+
+### Next steps
+
+The code that produces the information in the web page is in webcam/viewcam/controllers/default.py , and the code that produces the HTML page is in webcam/viewcam/views/default/index.html . 
+    
+- You can learn more about the [Python interface to the RPI camera](https://picamera.readthedocs.io/en/release-1.10/).
+- You can learn more about [Web2Py](http://www.web2py.com/book).
+
+Happy coding!
