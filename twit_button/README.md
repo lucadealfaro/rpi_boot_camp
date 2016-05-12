@@ -29,15 +29,15 @@ Note how, every time a button press is detected, the LED turns on for 0.5 second
 
 Next, we are going to develop an application where, at each button press, we post an update to twitter.  Just because!  This could be a useful kind of doorbell, after all.  Plus, this is a good example of how to get a device "do stuff" with the internet.  First, we need to install some software. First the excellent [requests](http://docs.python-requests.org/en/master/user/quickstart/) package to make requests:
 
-    sudo apt-get install python-requests
+    sudo apt-get install python-requests python-pip
+    sudo pip install requests requests_oauthlib
     
 And the excellent simple Twitter API written by Rakshit Agrawal (do this from the twit_button directory):
 
     git clone https://github.com/rakshit-agrawal/python-twitter-apps.git twitter
     touch twitter/__init__.py
 
-Follow [these instructions](https://github.com/rakshit-agrawal/python-twitter-apps) to create a Twitter account (if you don't have one already), and an App, obtaining the authentication parameters.
-Then add them as follows to the configuration file:
+Follow [these instructions](https://github.com/rakshit-agrawal/python-twitter-apps) to create a Twitter account (if you don't have one already), and an App, obtaining the authentication parameters. *Note: Twitter will ask you for a mobile phone number for you to be able to create an app.*  You know, nothing comes for free. Then add them as follows to the configuration file:
 
     cp credentials.example.json credentials.json
     nano credentials.json
