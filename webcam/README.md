@@ -64,13 +64,15 @@ or else, you can also start that via an init script:
     
 ### Visualization
 
-We assume that you got the image acquisition loop above working. 
-Now we need to get and start the web2py web server. 
+We assume that you got the image acquisition loop above working. To visualize the images, we are going to use the [web2py](http://www.web2py.com) web framework.  Let's get the code:
 
     cd ~/rpi_boot_camp
     wget http://www.web2py.com/examples/static/web2py_src.zip
     unzip web2py_src.zip
 
+A web2py application can consist of multiple apps; see the [web2py book](http://book.web2py.com) for more information.  We now need to link the viewcam app to the web2py server.
+
+    ln -s 
 
  
 
