@@ -1,0 +1,17 @@
+{{extend 'layout.html'}}
+
+<center>
+  <img style="width:640px" src="{{=URL('static','images/loading')}}" id="pi">
+</center>
+
+<script>
+  {{=ASSIGNJS(picamera_url=URL('get_image'))}}
+  var pi = function(){
+    jQuery.getJSON(picamera_url)
+    .done(function(data){
+        jQuery('#pi').attr('src', data.src);
+        setTimeout(pi, 500);
+      });
+  };
+  pi();
+</script>
