@@ -1,29 +1,29 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          camcam
+# Provides:          web2py
 # Required-Start:    $local_fs ram_fs
 # Required-Stop:
 # Default-Start:     S
 # Default-Stop:         0 6
-# Short-Description: Prepares RAM file system for cam.
+# Short-Description: Starts local web2py server.
 ### END INIT INFO
 
-PATH=/sbin:/bin
-PID_FILE=/var/run/cam.pid
-MYDIR=/home/pi
-CMD=$MYDIR/rpi_boot_camp/webcam/image_acquisition/image_loop.py
+PATH="/sbin:/bin:/usr/bin"
+PID_FILE=/var/run/web2py.pid
+MYDIR=/home/pi/rpi_boot_camp
+CMD=$MYDIR/web2py/web2py.py
 PYTHON=/usr/bin/python
 
 . /lib/lsb/init-functions
 
 do_start () {
-    /sbin/start-stop-daemon --start --chuid pi -d $MYDIR --background -v --user pi --pidfile $PID_FILE --make-pidfile --exec $PYTHON --startas $CMD
-    log_success_mgs "Started camcam"
+    /sbin/start-stop-daemon --start --chuid pi -d $MYDIR --background -v --user pi --pidfile $PID_FILE --make-pidfile --exec $PYTHON --startas $PYTHON -- $CMD -a banana -p 8888 -i 0.0.0.0
+    log_success_msg "Started web2py"
 }
 do_stop () {
     /sbin/start-stop-daemon --stop -d $MYDIR -v --user pi --pidfile $PID_FILE --exec $PYTHON --retry 10
     rm $PID_FILE
-    log_success_msg "Stopped camcam"
+    log_success_msg "Stopped web2py"
 }
 
 case "$1" in

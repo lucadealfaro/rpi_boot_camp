@@ -5,25 +5,25 @@
 # Required-Stop:
 # Default-Start:     S
 # Default-Stop:         0 6
-# Short-Description: Prepares RAM file system for cam.
+# Short-Description: Image acquisition loop.
 ### END INIT INFO
 
-PATH=/sbin:/bin
-PID_FILE=/var/run/web2py.pid
-MYDIR=/home/pi
-CMD=$MYDIR/web2py/web2py.py
+PATH="/sbin:/bin:/usr/bin"
+PID_FILE=/var/run/camcam.pid
+MYDIR=/home/pi/rpi_boot_camp/webcam
+CMD=$MYDIR/image_acquisition/image_loop.py
 PYTHON=/usr/bin/python
 
 . /lib/lsb/init-functions
 
 do_start () {
-    /sbin/start-stop-daemon --start --chuid pi -d $MYDIR --background -v --user pi --pidfile $PID_FILE --make-pidfile --exec $PYTHON --startas $CMD -- -a banana -p 8888 -i 0.0.0.0
-    log_success_mgs "Started web2py"
+    /sbin/start-stop-daemon --start --chuid pi -d $MYDIR --background -v --user pi --pidfile $PID_FILE --make-pidfile --exec $PYTHON --startas $PYTHON -- $CMD
+    log_success_msg "Started camcam"
 }
 do_stop () {
     /sbin/start-stop-daemon --stop -d $MYDIR -v --user pi --pidfile $PID_FILE --exec $PYTHON --retry 10
     rm $PID_FILE
-    log_success_msg "Stopped web2py"
+    log_success_msg "Stopped camcam"
 }
 
 case "$1" in

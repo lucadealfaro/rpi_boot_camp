@@ -13,7 +13,8 @@ PATH=/sbin:/bin
 . /lib/lsb/init-functions
 
 do_start () {
-    mount -o size=50M -t tmpfs none /ramfs
+    mkdir -p /ramfs
+    mount -o size=200M -t tmpfs none /ramfs
     echo "Started ramfs"
 }
 do_stop () {
