@@ -1,3 +1,4 @@
+import json
 import RPi.GPIO as GPIO
 import time
 
@@ -16,12 +17,15 @@ GPIO.setup(PIN_IN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(PIN_OUT, GPIO.OUT)
 GPIO.output(PIN_OUT, False)
 
+# We need to read in our twitter keys.
+
 # This is the callback for when a button press has been detected.
 def button_press(channel):
     print "Button press on %r" % channel
     # We flash the LED ON for half a second.
     GPIO.output(PIN_OUT, True)
-    time.sleep(0.5)
+    # Here is the novelty: we do the twitter call!
+
     GPIO.output(PIN_OUT, False)
 
 # We attach the callback to the button with a debounce time of 200ms.

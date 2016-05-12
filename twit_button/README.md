@@ -38,5 +38,12 @@ And the excellent simple Twitter API written by Rakshit Agrawal (do this from th
     git clone https://github.com/rakshit-agrawal/python-twitter-apps.git
     touch python-twitter-apps/__init__.py
 
+Follow [these instructions](https://github.com/rakshit-agrawal/python-twitter-apps) to create a Twitter account (if you don't have one already), and an App, obtaining the authentication parameters.
+Then add them as follows to the configuration file:
+
+    cp credentials.example.json credentials.json
+    nano credentials.json
+
+and complete the information there. 
 
     

@@ -25,3 +25,4 @@ webcam/viewcam/static/temp
 webcam/viewcam/progress.log
 .idea/*
 twit_button/python-twitter-apps
+twit_button/credentials.json
