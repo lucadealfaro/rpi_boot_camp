@@ -24,3 +24,4 @@ webcam/viewcam/*.py[oc]
 webcam/viewcam/static/temp
 webcam/viewcam/progress.log
 .idea/*
+twit_button/python-twitter-apps
