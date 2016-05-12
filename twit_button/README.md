@@ -1,9 +1,7 @@
 # Twitter-Connected Button Boot Camp
 
 In this boot camp we will construct a twitter and LED-connected button.
-We start with some hardware magic.  This is the pinout of the RPI GPIO:
-
-[Pinout](resources/physical-pin-numbers.png)
+We start with some hardware magic.  This is the pinout of the [RPI GPIO](resources/physical-pin-numbers.png).
 
 We are going to connect:
 
@@ -35,8 +33,8 @@ Next, we are going to develop an application where, at each button press, we pos
     
 And the excellent simple Twitter API written by Rakshit Agrawal (do this from the twit_button directory):
 
-    git clone https://github.com/rakshit-agrawal/python-twitter-apps.git
-    touch python-twitter-apps/__init__.py
+    git clone https://github.com/rakshit-agrawal/python-twitter-apps.git twitter
+    touch twitter/__init__.py
 
 Follow [these instructions](https://github.com/rakshit-agrawal/python-twitter-apps) to create a Twitter account (if you don't have one already), and an App, obtaining the authentication parameters.
 Then add them as follows to the configuration file:
