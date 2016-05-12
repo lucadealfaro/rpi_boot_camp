@@ -10,6 +10,7 @@ GPIO.setup(40, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Sets pin 33 as output.
 GPIO.setup(33, GPIO.OUT)
+GPIO.output(33, False)
 
 # This is the callback for when a button press has been detected.
 def button_press(channel):
@@ -23,4 +24,6 @@ def button_press(channel):
 GPIO.add_event_detect(40, GPIO.FALLING, callback=button_press, bouncetime=200)
 
 # That's all, folks.
+while True:
+    time.sleep(1.0)
 
