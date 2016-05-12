@@ -5,25 +5,30 @@ import time
 # or using chip numbering.  We use board numbering here.
 GPIO.setmode(GPIO.BOARD)
 
+# Which pins we use how.
+PIN_OUT = 40
+PIN_IN = 33
+
 # Sets pin 40 to input with pull-up resistor.
-GPIO.setup(40, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(PIN_IN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Sets pin 33 as output.
-GPIO.setup(33, GPIO.OUT)
-GPIO.output(33, False)
+GPIO.setup(PIN_OUT, GPIO.OUT)
+GPIO.output(PIN_OUT, False)
 
 # This is the callback for when a button press has been detected.
 def button_press(channel):
     print "Button press on %r" % channel
     # We flash the LED ON for half a second.
-    GPIO.output(33, True)
+    GPIO.output(PIN_OUT, True)
     time.sleep(0.5)
-    GPIO.output(33, False)
+    GPIO.output(PIN_OUT, False)
 
 # We attach the callback to the button with a debounce time of 200ms.
-GPIO.add_event_detect(40, GPIO.FALLING, callback=button_press, bouncetime=200)
+GPIO.add_event_detect(PIN_IN, GPIO.FALLING, callback=button_press, bouncetime=200)
 
 # That's all, folks.
+# We need to sleep forever.
 while True:
     time.sleep(1.0)
 
