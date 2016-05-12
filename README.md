@@ -9,9 +9,9 @@ Before you start with these boot camps, you need to install some software on you
     sudo apt-get upgrade
     sudo apt-get install git
 
-Then, go to the directory of the boot camp you want to follow, and read the README file there: 
+Then, follow these instructions:
 
-- Webcam: 
+- [Webcam](webcam/README.md)
+- [Twitter button](twit_button/README.md)
 
-    cd webcam
 
